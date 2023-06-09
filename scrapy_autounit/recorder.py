@@ -43,19 +43,19 @@ from scrapy_autounit.player import Player
 class AutoUnit(unittest.TestCase):
 
 	def fixtures_from_dir(self, dirpath):
-	_dir = dirpath
-	fixtures = glob(os.path.join(_dir, "*.bin"))
-	for fixture in fixtures:
-		player = Player.from_fixture(fixture)
-		player.playback()
+		_dir = dirpath
+		fixtures = glob(os.path.join(_dir, "*.bin"))
+		for fixture in fixtures:
+			player = Player.from_fixture(fixture)
+			player.playback()
 
 	def test_vmware(self):
-	dirpath = '/opt/app/data/test_fixtures/vmware/'
-	self.fixtures_from_dir(dirpath)
+		dirpath = '/opt/app/data/test_fixtures/vmware/'
+		self.fixtures_from_dir(dirpath)
 
 	def test_microsoft(self):
-	dirpath = '/opt/app/data/test_fixtures/microsoft/'
-	self.fixtures_from_dir(dirpath)
+		dirpath = '/opt/app/data/test_fixtures/microsoft/'
+		self.fixtures_from_dir(dirpath)
 
 if __name__ == '__main__':
 	unittest.main()
