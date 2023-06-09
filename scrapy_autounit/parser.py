@@ -3,7 +3,6 @@ import copy
 from scrapy import Item
 from scrapy.http import Request, Response
 from scrapy.spiders import CrawlSpider
-from scrapy.utils.reqser import request_to_dict
 
 
 class Parser:
@@ -55,7 +54,7 @@ class Parser:
         return meta
 
     def _request_to_dict(self, request):
-        _request = request_to_dict(request, spider=self.spider)
+        _request = request.to_dict(spider=self.spider)
         if not _request['callback']:
             _request['callback'] = 'parse'
         elif isinstance(self.spider, CrawlSpider):

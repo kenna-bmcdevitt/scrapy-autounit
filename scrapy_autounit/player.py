@@ -4,7 +4,7 @@ import sys
 from scrapy import signals, Item
 from scrapy.exceptions import NotConfigured
 from scrapy.utils.misc import load_object, arg_to_iter
-from scrapy.utils.reqser import request_from_dict
+from scrapy.utils.request import request_from_dict
 from testfixtures import compare
 
 from .cassette import Cassette
