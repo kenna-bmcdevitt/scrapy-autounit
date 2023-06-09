@@ -32,6 +32,35 @@ if __name__ == '__main__':
     unittest.main()
 """
 
+NEW_TEMPLATE = """# THIS IS A GENERATED FILE
+import os
+import unittest
+from glob import glob
+
+from scrapy_autounit.player import Player
+
+
+class AutoUnit(unittest.TestCase):
+
+    def fixtures_from_dir(self, dirpath):
+	_dir = dirpath
+	fixtures = glob(os.path.join(_dir, "*.bin"))
+	for fixture in fixtures:
+	    player = Player.from_fixture(fixture)
+	    player.playback()
+
+    def test_vmware(self):
+	dirpath = '/opt/app/data/test_fixtures/vmware/'
+	self.fixtures_from_dir(dirpath)
+
+    def test_microsoft(self):
+	dirpath = '/opt/app/data/test_fixtures/microsoft/'
+	self.fixtures_from_dir(dirpath)
+
+if __name__ == '__main__':
+    unittest.main()
+"""
+
 
 class Recorder(Parser):
     def __init__(self, spider):
@@ -115,7 +144,8 @@ class Recorder(Parser):
         command = 'scrapy {}'.format(' '.join(sys.argv))
         test_path = os.path.join(path, 'test_fixtures.py')
         test_name = self.spider_name + '__' + callback_name
-        test_code = TEST_TEMPLATE.format(test_name=test_name, command=command)
+        #test_code = TEST_TEMPLATE.format(test_name=test_name, command=command)
+	test_code = NEW_TEMPLATE
         with open(str(test_path), 'w') as f:
             f.write(test_code)
 
